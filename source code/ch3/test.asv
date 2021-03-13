@@ -1,0 +1,39 @@
+clear, clc, close all
+addpath('./ch3')
+addpath('./ch3/utils')
+
+minValue=1; maxValue=256;
+I = imread('./example/Einstein.jpg');
+
+% figure(1); 
+% subplot(1, 2, 1); imshow(I); title('input image');
+% subplot(1, 2,2); bar(im2hist(I, minValue, maxValue)); title('histogram of input image');
+
+% I = grayslice(I, 2^3);
+[equalizedImage, cdf] = histequal(I, minValue, maxValue);
+
+I_eq = histeq(I);
+
+% figure(2);
+% subplot(3, 3, 1); imshow(I); title("input image");
+% subplot(3, 3, 2); imshow(equalizedImage); title("custom");
+% subplot(3, 3, 3); imshow(I_eq); title("matlab");
+% axis tight; axis off
+% 
+% subplot(3, 3, 4); bar(im2hist(I, minValue, maxValue)); xlim([minValue, maxValue]);
+% subplot(3, 3, 5); bar(im2hist(equalizedImage, minValue, maxValue)); xlim([minValue, maxValue]);
+% subplot(3, 3, 6); bar(im2hist(I_eq, minValue, maxValue)); xlim([minValue, maxValue]);
+% 
+% subplot(3, 3, [7, 8, 9]); 
+% plot(cdf, 'r', 'LineWidth', 2); 
+% xlim([minValue, maxValue]); ylim([minValue, maxValue]);
+% title("image transform function, s=T(r)");
+
+LowContrastImage = imread('./example/low_cont.jpg'); % source image
+HighContrastImage = imread('./example/high_cont.jpg'); % target image
+
+[MatchedImage, InverseTargetCDF, TargetCDF] = histMatching(LowContrastImage, HighContrastImage, minValue, maxValue);
+
+figure(3);
+subplot(3, 3, 1); imshow(LowContrastImage); title("Low contrast image");
+subplot(3, 3, 2); imshow(HighContrastImage); title("High contrast image");
