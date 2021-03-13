@@ -15,26 +15,28 @@ function [new, T] = histequal(image, minValue, maxValue)
 
 % Toy Example
 
-[height, width] = size(image); % 입력 영상의 크기
+[height,width] = size(image); % 입력 영상의 크기
 totalPixel = width * height; % 전체 픽셀의 개수
 hist = im2hist(image, minValue, maxValue) / totalPixel; % 히스토그램 정규화(0 ~ 1)
 
 T = zeros(1, maxValue); % 입력 영상 히스토그램의 CDF를 저장할 변수
 
 T(1) = hist(1);
-for i=2:maxValue % 최솟값 ~ 최댓값까지 각 값에 대한 CDF 계산
+for i=minValue+1:maxValue % 최솟값 ~ 최댓값까지 각 값에 대한 CDF 계산
     T(i) = T(i-1) + hist(i);
 end
 
-T = roundn((maxValue-1) * T, 0);
+T = round((maxValue-1) * T);
 
-new = zeros([height, width], 'uint8');
+new = zeros([height, width]);
 
 for i=1:height
-    for j=1:width
-        new(i, j) = T(image(i, j) + 1);
-    end
+    for j=1:
 end
+% for k=minValue:maxValue
+%     idx = new==(k-1);
+%     new(idx) = T(k);
+% end
 
 end
 
