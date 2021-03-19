@@ -4,31 +4,30 @@ addpath('./ch3/utils')
 
 minValue=1; maxValue=256;
 I = imread('./example/low_cont.jpg');
-% I = rgb2gray(I);
 
-% figure(1); 
-% subplot(1, 3, 1); imshow(I); title('input image');
-% subplot(1, 3, 2); bar(im2hist(I, minValue, maxValue)); title('custom histogram of input image');
-% subplot(1, 3, 3); imhist(I); title('MATLAB histogram of input image');
+figure(1); 
+subplot(1, 3, 1); imshow(I); title('input image');
+subplot(1, 3, 2); bar(im2hist(I, minValue, maxValue)); title('custom histogram of input image');
+subplot(1, 3, 3); imhist(I); title('MATLAB CODE');
 
 [equalizedImage, T] = histequal(I, minValue, maxValue);
 
 I_eq = histeq(I);
 
-% figure(2);
-% subplot(3, 3, 1); imshow(I); title("input image");
-% subplot(3, 3, 2); imshow(equalizedImage); title("custom");
-% subplot(3, 3, 3); imshow(I_eq); title("matlab");
-% axis tight; axis off
-% 
-% subplot(3, 3, 4); bar(im2hist(I, minValue, maxValue)); xlim([minValue, maxValue]);
-% subplot(3, 3, 5); bar(im2hist(equalizedImage, minValue, maxValue)); xlim([minValue, maxValue]);
-% subplot(3, 3, 6); bar(im2hist(I_eq, minValue, maxValue)); xlim([minValue, maxValue]);
-% 
-% subplot(3, 3, [7, 8, 9]); 
-% plot(T, 'r', 'LineWidth', 2); 
-% xlim([minValue, maxValue]); ylim([minValue, maxValue]);
-% title("image transform function, s=T(r)");
+figure(2);
+subplot(3, 3, 1); imshow(I); title("input image");
+subplot(3, 3, 2); imshow(equalizedImage); title("custom");
+subplot(3, 3, 3); imshow(I_eq); title("matlab");
+axis tight; axis off
+
+subplot(3, 3, 4); bar(im2hist(I, minValue, maxValue)); xlim([minValue, maxValue]);
+subplot(3, 3, 5); bar(im2hist(equalizedImage, minValue, maxValue)); xlim([minValue, maxValue]);
+subplot(3, 3, 6); bar(im2hist(I_eq, minValue, maxValue)); xlim([minValue, maxValue]);
+
+subplot(3, 3, [7, 8, 9]); 
+plot(T, 'r', 'LineWidth', 2); 
+xlim([minValue, maxValue]); ylim([minValue, maxValue]);
+title("image transform function, s=T(r)");
 
 SourceImage = imread('./example/low_cont.jpg'); % source image
 TargetImage = imread('./example/high_cont.jpg'); % target image
@@ -55,3 +54,12 @@ plot(GInverse, 'r:', 'LineWidth', 2);
 plot([minValue, maxValue], [minValue, maxValue], 'k:', 'LineWidth', 2);
 xlim([minValue, maxValue]); ylim([minValue, maxValue]);
 title("image transform function"); legend("$G(z)$", "$G^{-1}(s)$", "$y=x$", 'Interpreter','latex')
+
+I = imread('./example/Einstein.jpg');
+kernelSize = 7;
+Stride = 1;
+
+EqualizedImage = LocalHistogramEqualization(I, minValue, maxValue, kernelSize, Stride);
+figure(4);
+subplot(1, 2, 1); imshow(I); title("Original Image");
+subplot(1, 2, 2); imshow(EqualizedImage); title("Local Equalized Image");

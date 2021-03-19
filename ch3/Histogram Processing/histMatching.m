@@ -4,6 +4,10 @@ function [MatchedImage, GInverse, G] = histMatching(SourceImage, TargetImage, mi
 %       1. sourceImage : 매칭시킬 source 영상
 %       2. targetImage : 매칭시킬 target 히스토그램을 가진 영상
 %       3. minValue, maxValue : 입력 영상 밝기값의 최솟값과 최댓값
+%   output
+%       1. MatchedImage : target 영상을 이용해서 source 영상을 매칭시킨 출력 영상
+%       2. GInverse : s -> z로 변환하는 G의 역변환
+%       3. G : z -> s로의 변환
 
 % Basic Algorithm
 %   1. source 영상을 히스토그램 평활화적용
