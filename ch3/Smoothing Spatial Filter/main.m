@@ -22,7 +22,7 @@ subplot(3, 3, 5); imshow(BoxFilterVector(I, 9)); title("Smoothing($k=9$)", 'Inte
 subplot(3, 3, 6); imshow(BoxFilterVector(I, 11)); title("Smoothing($k=11$)", 'Interpreter','latex');
 subplot(3, 3, 7); imshow(BoxFilterVector(I, 13)); title("Smoothing($k=13$)", 'Interpreter','latex');
 subplot(3, 3, 8); imshow(BoxFilterVector(I, 15)); title("Smoothing($k=15$)", 'Interpreter','latex');
-subplot(3, 3, 9); imshow(BoxFilterVector(I, 51)); title("Smoothing($k=17$)", 'Interpreter','latex');
+subplot(3, 3, 9); imshow(BoxFilterVector(I, 17)); title("Smoothing($k=17$)", 'Interpreter','latex');
 
 if size(I, 3) == 3 
     I = rgb2gray(I);
