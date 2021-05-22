@@ -32,17 +32,14 @@ I = imread('../../example/Ch5/Fig0503 (original_pattern).tif');
 % Gaussian Noise
 mu1 = 0.0;
 sigma1 = 1.0;
-
 I_normal1 = im2double(I) + (sigma1 * randraw('normal', [], size(I)) + mu1);
 
 mu2 = 1.0;
 sigma2 = 1.0;
-
 I_normal2 = im2double(I) + (sigma2 * randraw('normal', [], size(I)) + mu2);
 
 mu3 = 0.0;
 sigma3 = 5.0;
-
 I_normal3 = im2double(I) + (sigma3 * randraw('normal', [], size(I)) + mu3);
 
 figure(2);
@@ -55,15 +52,12 @@ saveas(gcf, './result/GaussianNoise.png');
 
 % Rayleigh Noise
 sigma1 = 1.0;
-
 I_rayl1 = im2double(I) + randraw('rayl', sigma1, size(I));
 
 sigma2 = 0.5;
-
 I_rayl2 = im2double(I) + randraw('rayl', sigma2, size(I));
 
 sigma3 = 2.0;
-
 I_rayl3 = im2double(I) + randraw('rayl', sigma3, size(I));
 
 figure(3);

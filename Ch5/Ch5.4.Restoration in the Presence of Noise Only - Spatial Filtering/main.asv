@@ -1,0 +1,47 @@
+clc, clear, close all
+
+addpath('../../Common Library')
+addpath('../../Common Library/randraw/')
+
+I = imread('../../example/Ch5/Fig0507(a)(ckt-board-orig).tif');
+%% Mean Filter
+I_corruption = im2double(I) + (0.2 * randraw('normal', [], size(I)));
+
+% Arithmetic Mean Filter
+ArithmeticSmoothing = ArithmeticMeanFilter(I_corruption, 7);
+
+% Geometic Mean Filter
+GeometricSmoothing = GeometricMeanFilter(I_corruption, 3);
+
+% Harmonic Mean Filter
+HarmonicSmoothing = HarmonicMeanFilter(I_corruption, 5);
+
+% Contraharmonic Mean Filter
+% ContraHarmonicSmoothing = ContraHarmonicMeanFilter(I_corruption, 3, 0.5);
+
+figure(1);
+imshow([I_corruption ArithmeticSmoothing; GeometricSmoothing HarmonicSmoothing])
+ 
+I_white = SaltAndPepper(I, 0.1, 0.0);
+ContraHarmonicSmoothing = ContraHarmonicMeanFilter(I_corruption, 3, 1.5);
+
+figure(2);
+imshow([I_corruption; ContraHarmonicSmoothing])
+
+%% Order-Statistic Filter
+
+% Median Filter
+MedianSmoothing = MedianFilter(I, 21);
+
+% Max Filter
+MaxSmoothing = MaxFilter(I, 21);
+
+% Min Filter
+MinSmoothing = MinFilter(I, 21);
+imshow(MinSmoothing)
+
+% Midpoint Filter
+MidpointSmoothing = MidpointFilter(I, 21);
+
+% Alpha-Trimmed Mean Filter
+AlphaTrimmedSmoothing = AlphaTrimmedMeanFilter(I, 21, 21^2 - 1);
