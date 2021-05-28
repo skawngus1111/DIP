@@ -14,7 +14,7 @@ end
 n = floor(windowSize/2);
 
 [height, width] = size(image); % 입력 영상의 높이와 너비 추출
-FilteredImage = zeros([height, width], 'uint8'); % 입력 영상의 크기에 따라서 스무딩 영상 초기화
+FilteredImage = zeros([height, width]); % 입력 영상의 크기에 따라서 스무딩 영상 초기화
 image = double(image);
 PaddedImage = zeros([height+2*n, width+2*n]);
 PaddedImage(n+1:height+n, n+1:width+n) = image;

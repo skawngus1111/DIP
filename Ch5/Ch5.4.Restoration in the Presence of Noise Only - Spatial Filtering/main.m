@@ -89,3 +89,23 @@ imshow([I_gaussianNoise I_blackwhite;
         ArithmeticSmoothing GeometricSmoothing;
         MedianSmoothing AlphaTrimmedSmoothing])
 saveas(gcf, './result/MultiNoiseExample.png');
+%% Adaptive Filter
+
+% Adaptive, Local Noise Reduction Filter
+I = imread('../../example/Ch5/Fig0513(a)(ckt_gaussian_var_1000_mean_0).tif');
+ArithmeticSmoothing = ArithmeticMeanFilter(I, 7);
+GeometricSmoothing = GeometricMeanFilter(I, 7);
+FilteredImage = AdaptiveLocalNoiseReductionFilter(I, 7);
+
+figure(7);
+imshow([I ArithmeticSmoothing; 
+        GeometricSmoothing FilteredImage])
+saveas(gcf, './result/AdaptiveLocalNoiseReductionFilterExample.png');
+
+% Adaptive Median Filter
+I = imread('../../example/Ch5/Fig0514(a)(ckt_saltpep_prob_pt25).tif');
+MedianSmoothing = MedianFilter(I, 7);
+FilteredImage=AdaptiveMedianFilter(I, 3, 7);
+figure(8);
+imshow([I MedianSmoothing FilteredImage])
+saveas(gcf, './result/AdaptiveMedianFilterExample.png');
