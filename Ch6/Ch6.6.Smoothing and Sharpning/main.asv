@@ -1,0 +1,30 @@
+clc, clear, close all
+
+%% Color image Smoothing
+RGB = imread('../../example/Ch6/Fig0638(a)(lenna_RGB).tif');
+HSV = rgb2hsv(RGB);
+
+R = RGB(:, :, 1);
+G = RGB(:, :, 2);
+B = RGB(:, :, 3);
+
+figure(1);
+imshow(RGB);
+
+figure(2);
+imshow([R, G, B]);
+
+H = HSV(:, :, 1);
+S = HSV(:, :, 2);
+V = HSV(:, :, 3);
+
+figure(3);
+imshow([H, S, V]);
+
+RGB_smoothing = imgaussfilt(RGB);
+figure(4);
+imshow(imgaussfilt(V))
+HSV_smoothing = uint8(hsv2rgb(cat(3, H, S, imgaussfilt(V))));
+
+figure(4);
+imshow([RGB_smoothing, HSV_smoothing]);
